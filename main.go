@@ -28,6 +28,8 @@ func main() {
 	r.Static("/assets", "./app/assets")
 
 	logger = log.New(os.Stdout, fmt.Sprintf("[%s] ", "ocrserver"), 0)
+	// Apply filters
+	r.Apply(&filters.CORSFilter{})
 	r.Apply(&filters.LogFilter{Logger: logger})
 
 	port := os.Getenv("PORT")
